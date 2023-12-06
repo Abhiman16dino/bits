@@ -55,7 +55,7 @@ const App = () => {
       setLoading(true);
       const blobName = `${new Date().getTime()}-${file.name}`; // Specify a default blob name if needed
       const blobClient = containerClient.getBlockBlobClient(blobName);  // get the blob client
-      await blobClient.uploadData(file, { blobHTTPHeaders: { blobContentType: file.type } }); // upload the image
+      await blobClient.uploadData(file, { blobHTTPHeaders: { blobContentType: file.type,"Access-Control-Allow-Origin":"*" } }); // upload the image
       await fetchImages();   // fetch all images again after the upload is completed
     } catch (error) {
       console.error(error);  // Handle error
