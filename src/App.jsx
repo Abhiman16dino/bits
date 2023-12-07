@@ -6,10 +6,12 @@ import Placeholder from './assets/placeholder.jpeg'  // import the placeholder i
 import Loading from './components/Loading';  // import the loading component
 import { BlobServiceClient } from '@azure/storage-blob';
 
+
 const App = () => {
   const [file, setFile] = useState(null);
   const [imageUrls, setImageUrls] = useState([]);
   const [loading, setLoading] = useState(false);
+  
 
   //Storage account credentials
   const account = import.meta.env.VITE_STORAGE_ACCOUNT  // get the storage account name from the .env file
@@ -55,7 +57,7 @@ const App = () => {
       setLoading(true);
       const blobName = `${new Date().getTime()}-${file.name}`; // Specify a default blob name if needed
       const blobClient = containerClient.getBlockBlobClient(blobName);  // get the blob client
-      await blobClient.uploadData(file, { blobHTTPHeaders: { blobContentType: file.type,"Access-Control-Allow-Origin":"*" } }); // upload the image
+      await blobClient.uploadData(file, { blobHTTPHeaders: { blobContentType: file.type} }); // upload the image
       await fetchImages();   // fetch all images again after the upload is completed
     } catch (error) {
       console.error(error);  // Handle error
